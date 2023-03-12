@@ -175,35 +175,3 @@ x=x[,c("PassengerId","Survived")]
 write.csv(x,"E:/Edvancer/titanic_gbm_predict.csv",row.names = F)
 
 
-### Datarobot
-
-
-library(randomForestSRC)
-{
-  o <- tune(Survived~., train_df, doBest = TRUE)
-  
-  o$optimal
-  
-  o
-  best_params=data.frame(mtry=13,
-                         ntree=500,
-                         maxnodes=40,
-                         nodesize=3)
-}
-
-train_df$Survived=as.factor(train_df$Survived)
-ld.rf.final=randomForest(Survived~.,
-                         mtry=best_params$mtry,
-                         ntree=best_params$ntree,
-                         maxnodes=best_params$maxnodes,
-                         nodesize=best_params$nodesize,
-                         data=train_df)
-
-test.pred=predict(ld.rf.final,newdata = test_df)
-
-x=data.frame(a=1:418)
-x$PassengerId=test_df$PassengerId
-x$Survived=test.pred
-x$a=NULL
-write.csv(x,"C:/Edvancer/submit_RF.csv",row.names = F)
-
