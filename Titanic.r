@@ -174,5 +174,4 @@ x=x[,c("PassengerId","Survived")]
 
 write.csv(x,"E:/Edvancer/titanic_gbm_predict.csv",row.names = F)
 
-FJfghikghsifgs
 
